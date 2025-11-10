@@ -12,7 +12,7 @@ import {
 import { Cedarville_Cursive } from "next/font/google";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, CheckCircle2Icon } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 interface HeroSectionProps {
   onGetStarted: () => void;
@@ -88,7 +88,7 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
                   Heads up: Gemini may get rate-limited or overloaded.
                 </AlertTitle>
                 <AlertDescription className="mx-auto">
-                  If questions or the report fail to load, try again shortly.
+                  If questions or the report fail to load, please keep trying .
                 </AlertDescription>
               </Alert>
             </div>
