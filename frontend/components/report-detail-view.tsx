@@ -34,11 +34,14 @@ export default function ReportDetailView({ onBack }: ReportDetailViewProps) {
     async function fetchDetails() {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:4000/recent/${chatId}`, {
-          headers: {
-            Authorization: `Bearer ${await getToken()}`,
-          },
-        });
+        const res = await fetch(
+          `https://product-transparency-report-generator.onrender.com/recent/${chatId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${await getToken()}`,
+            },
+          }
+        );
         if (!res.ok) throw new Error("Error fetching data");
         const data = await res.json();
         setReport(data);

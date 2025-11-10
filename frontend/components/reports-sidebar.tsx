@@ -24,11 +24,14 @@ export default function ReportsSidebar({ onViewReport }: ReportsSidebarProps) {
   async function fetchRecents() {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:4000/recents", {
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
+      const res = await fetch(
+        "https://product-transparency-report-generator.onrender.com/recents",
+        {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
       if (!res.ok) throw new Error("Error fetching Recents");
       const data = await res.json();
       setAllReports(data);
@@ -46,12 +49,15 @@ export default function ReportsSidebar({ onViewReport }: ReportsSidebarProps) {
   async function handleDelete(chatId: String) {
     try {
       setIsDeletingId(chatId);
-      const res = await fetch(`http://localhost:4000/recent/${chatId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${await getToken()}`,
-        },
-      });
+      const res = await fetch(
+        `https://product-transparency-report-generator.onrender.com/recent/${chatId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
+        }
+      );
       if (!res.ok) throw new Error("Error deleting");
       toast.success("Report Deleted Successfully", {
         style: { background: "green" },
@@ -102,7 +108,7 @@ export default function ReportsSidebar({ onViewReport }: ReportsSidebarProps) {
         <div className="flex-1 overflow-y-auto">
           {isOpen && (
             <div className="p-4 space-y-2">
-              {loading && <div>Loading....</div>}
+              {loading && allReports.length === 0 ? <div>Loading....</div> : ""}
               {!loading && allReports.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-8">
                   No reports yet. Create your first one!

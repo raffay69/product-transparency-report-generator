@@ -55,19 +55,22 @@ export default function FormSection({
     try {
       setIsSubmitting(true);
 
-      const response = await fetch("http://localhost:4000/dynamic-question", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
-        },
-        body: JSON.stringify({
-          chatId: searchParam.get("chatId"),
-          qno: currentQuestion.qno,
-          question: currentQuestion.question,
-          answer: currentAnswer,
-        }),
-      });
+      const response = await fetch(
+        "https://product-transparency-report-generator.onrender.com/dynamic-question",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          body: JSON.stringify({
+            chatId: searchParam.get("chatId"),
+            qno: currentQuestion.qno,
+            question: currentQuestion.question,
+            answer: currentAnswer,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to fetch next question");
 
@@ -89,19 +92,22 @@ export default function FormSection({
       if (!currentQuestion) return;
 
       setIsSubmitting(true);
-      const response = await fetch(`http://localhost:4000/generate-report`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${await getToken()}`,
-        },
-        body: JSON.stringify({
-          chatId: searchParam.get("chatId"),
-          qno: currentQuestion.qno,
-          question: currentQuestion.question,
-          answer: currentAnswer,
-        }),
-      });
+      const response = await fetch(
+        `https://product-transparency-report-generator.onrender.com/generate-report`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${await getToken()}`,
+          },
+          body: JSON.stringify({
+            chatId: searchParam.get("chatId"),
+            qno: currentQuestion.qno,
+            question: currentQuestion.question,
+            answer: currentAnswer,
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to generate report");
 
