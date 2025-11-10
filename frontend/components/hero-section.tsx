@@ -11,6 +11,8 @@ import {
 } from "@clerk/nextjs";
 import { Cedarville_Cursive } from "next/font/google";
 import { toast } from "sonner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertTriangle, CheckCircle2Icon } from "lucide-react";
 
 interface HeroSectionProps {
   onGetStarted: () => void;
@@ -79,6 +81,17 @@ export default function HeroSection({ onGetStarted }: HeroSectionProps) {
             >
               Get Started
             </Button>
+            <div className="mt-5">
+              <Alert>
+                <AlertTitle className="text-center flex align-baseline mx-auto text-red-600">
+                  <AlertTriangle className="inline mr-2" size={20} />
+                  Heads up: Gemini may get rate-limited or overloaded.
+                </AlertTitle>
+                <AlertDescription className="mx-auto">
+                  If questions or the report fail to load, try again shortly.
+                </AlertDescription>
+              </Alert>
+            </div>
           </div>
         </div>
       </div>
